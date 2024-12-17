@@ -10,7 +10,7 @@ class Database:
         id TEXT NOT NULL,
         name TEXT NOT NULL,
         class_name TEXT NOT NULL,
-        arrived BLOB NOT NULL,
+        arrived BOOLEAN NOT NULL,
         image_link TEXT
         )
         ''')
@@ -35,5 +35,11 @@ class Database:
 
     def mark_all_users_as_not_arrived(self):
         self.cursor.execute('UPDATE users SET arrived = ?', (False,))
+        self.conn.commit()
+
+    def update_user(self, uid: str, name: str, class_name: str, image_link: str):
+        self.cursor.execute('''
+            UPDATE users SET name = ?, class_name = ?, arrived = ?, image_link = ? WHERE id = ?
+        ''', (name, class_name, False, image_link, uid))
         self.conn.commit()
 

@@ -25,15 +25,9 @@ def fetch_image():
     data = request.get_json()
     imagePath = data["image_link"]
     print("image fetched")
-    return send_file('images/' + imagePath, mimetype='image/jpeg')
-
-
-@app.route('/renew-users', methods=['POST'])
-def renew_users():
-    db.mark_all_users_as_not_arrived()
+    return send_file('$HOME/Students/'+ imagePath, mimetype='image/jpeg')
 
 
 if __name__ == "__main__":
-    db.mark_all_users_as_not_arrived()
-    app.run(host="192.168.0.110", debug=True, port=2399, ssl_context=("localhost.pem", "localhost-key.pem"))
+    app.run(host="0.0.0.0", debug=True, port=2399, ssl_context=("localhost.pem", "localhost-key.pem"))
 
